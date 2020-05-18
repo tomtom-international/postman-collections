@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "4ea4a328-8619-4ebb-91f4-16c65e7d26d4",
+		"name": "Map Display API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vector Tile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ba5a11c5-10b3-4cf6-9785-5fed41e6c632",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/map/1/tile/basic/main/:zoom/:X/:Y",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"map",
+						"1",
+						"tile",
+						"basic",
+						"main",
+						":zoom",
+						":X",
+						":Y"
+					],
+					"variable": [
+						{
+							"key": "zoom",
+							"value": "10",
+							"description": "Zoom level of the tile to be rendered."
+						},
+						{
+							"key": "X",
+							"value": "567",
+							"description": "The x coordinate of the tile on a zoom grid."
+						},
+						{
+							"key": "Y",
+							"value": "339.pbf",
+							"description": "The y coordinate of the tile on a zoom grid together with expected format."
+						}
+					]
+				},
+				"description": "Map Display API - Vector tile example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/maps-api/maps-api-documentation-vector/tile).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Raster Tile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16555c84-288a-48b4-b503-9971511e0c0c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/map/1/tile/basic/main/:zoom/:X/:Y",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"map",
+						"1",
+						"tile",
+						"basic",
+						"main",
+						":zoom",
+						":X",
+						":Y"
+					],
+					"variable": [
+						{
+							"description": "Zoom level of the tile to be rendered.",
+							"key": "zoom",
+							"value": "10"
+						},
+						{
+							"description": "The x coordinate of the tile on a zoom grid.",
+							"key": "X",
+							"value": "567"
+						},
+						{
+							"description": "The y coordinate of the tile on a zoom grid together with expected format.",
+							"key": "Y",
+							"value": "339.png"
+						}
+					]
+				},
+				"description": "Map Display API - Raster tile example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/maps-api/maps-api-documentation-raster/raster-tile).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Static image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad90ece2-8a33-4bca-bf63-7761182e85af",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/map/1/staticimage?center=13.41144,52.52343&zoom=11",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"map",
+						"1",
+						"staticimage"
+					],
+					"query": [
+						{
+							"key": "center",
+							"value": "13.41144,52.52343",
+							"description": "Center point coordinates."
+						},
+						{
+							"key": "zoom",
+							"value": "11",
+							"description": "The desired zoom level of the map."
+						}
+					]
+				},
+				"description": "Map Display API - Static image example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/maps-api/maps-api-documentation-raster/static-image).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "WMS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4d84f24-bc3d-4ea0-8424-cae0f4198f99",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/map/1/wms/?request=GetCapabilities",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"map",
+						"1",
+						"wms",
+						""
+					],
+					"query": [
+						{
+							"key": "request",
+							"value": "GetCapabilities",
+							"description": "The Request type."
+						}
+					]
+				},
+				"description": "Map Display API - WMS example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/maps-api/maps-api-documentation-raster/wms).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Copyrights",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6107863f-4dae-44b2-b564-c8c86509a338",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/map/1/copyrights/:zoom/:X/:Y",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"map",
+						"1",
+						"copyrights",
+						":zoom",
+						":X",
+						":Y"
+					],
+					"variable": [
+						{
+							"description": "Zoom level of the tile to be rendered.",
+							"key": "zoom",
+							"value": "10"
+						},
+						{
+							"description": "The x coordinate of the tile on a zoom grid.",
+							"key": "X",
+							"value": "567"
+						},
+						{
+							"description": "The y coordinate of the tile on a zoom grid together with expected format.",
+							"key": "Y",
+							"value": "339.json"
+						}
+					]
+				},
+				"description": "Map Display API - Copyrights example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/maps-api/maps-api-documentation/copyrights).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{API_KEY}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "key",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}

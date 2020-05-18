@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "5d04f52e-f8d9-4333-9cce-0879aeda3c76",
+		"name": "Search API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get geography geometry",
+			"item": [
+				{
+					"name": "Fuzzy search - geographies index",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f4bd6f70-5275-4845-941c-ccd48b728605",
+								"exec": [
+									"let response = pm.response.json();",
+									"let geometryId = response.results[0].dataSources.geometry.id;",
+									"pm.environment.set(\"geometryId\", geometryId)",
+									"postman.setNextRequest(\"Additional data - geometry\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.tomtom.com/search/2/search/:query?idxSet=Geo",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tomtom",
+								"com"
+							],
+							"path": [
+								"search",
+								"2",
+								"search",
+								":query"
+							],
+							"query": [
+								{
+									"key": "idxSet",
+									"value": "Geo"
+								}
+							],
+							"variable": [
+								{
+									"key": "query",
+									"value": "New York.json"
+								}
+							]
+						},
+						"description": "Search API - Fuzzy search - geographies index example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/fuzzy-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+					},
+					"response": []
+				},
+				{
+					"name": "Additional data - geometry",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e43e7e73-0258-47d6-8335-28f084f4339c",
+								"exec": [
+									"if (!pm.environment.get(\"geometryId\")) { throw new Error(\"Run Fuzzy search - geographies index first or set geometryId variable\"); }"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.tomtom.com/search/2/additionalData.json?geometries={{geometryId}}&geometriesZoom=11",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tomtom",
+								"com"
+							],
+							"path": [
+								"search",
+								"2",
+								"additionalData.json"
+							],
+							"query": [
+								{
+									"key": "geometries",
+									"value": "{{geometryId}}"
+								},
+								{
+									"key": "geometriesZoom",
+									"value": "11"
+								}
+							]
+						},
+						"description": "Search API - Additional data example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation/additional-data).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Fuzzy search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/search/:query",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"search",
+						":query"
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "amterdam.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Fuzzy search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/fuzzy-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Geobiased Fuzzy search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/search/:query?lat=40.83998&lon=14.25254",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"search",
+						":query"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "40.83998",
+							"description": "Latitude where results should be biased."
+						},
+						{
+							"key": "lon",
+							"value": "14.25254",
+							"description": "Longitude where results should be biased."
+						}
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "pizza.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Geobiased fuzzy search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/fuzzy-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Autocomplete",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/autocomplete/:query?lat=51.759431&lon=19.448653&language=pl-PL",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"autocomplete",
+						":query"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "51.759431",
+							"description": "Latitude where results should be biased."
+						},
+						{
+							"key": "lon",
+							"value": "19.448653",
+							"description": "Longitude where results should be biased."
+						},
+						{
+							"key": "language",
+							"value": "pl-PL",
+							"description": "Language in which autocomplete results should be returned."
+						}
+					],
+					"variable": [
+						{
+							"description": "Query string together with requested response format.",
+							"key": "query",
+							"value": "mazda dealer Warszawa.json"
+						}
+					]
+				},
+				"description": "Search API - Autocomplete search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation/autocomplete).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Typeahead search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/search/:query?typeahead=true",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"search",
+						":query"
+					],
+					"query": [
+						{
+							"key": "typeahead",
+							"value": "true",
+							"description": "If the \"typeahead\" flag is set, the query will be interpreted as a partial input, and the search will enter predictive mode."
+						}
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "Amsterd.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Typeahead search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/fuzzy-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Points of interest search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/poiSearch/:query",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"poiSearch",
+						":query"
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "petrol station.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Points of interest search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/points-interest-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Category search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/categorySearch/:query",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"categorySearch",
+						":query"
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "bistro.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Category search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/category-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Nearby search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/nearbySearch/.json?lat=37.337&lon=-121.89",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"nearbySearch",
+						".json"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "37.337",
+							"description": "Latitude where results should be biased."
+						},
+						{
+							"key": "lon",
+							"value": "-121.89",
+							"description": "Longitude where results should be biased."
+						}
+					]
+				},
+				"description": "Search API - Nearby search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/nearby-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Geometry search",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"geometryList\": [\r\n    {\r\n      \"type\": \"POLYGON\",\r\n      \"vertices\": [\r\n        \"37.7524152343544,-122.43576049804686\",\r\n        \"37.70660472542312,-122.43301391601562\",\r\n        \"37.712059855877314,-122.36434936523438\",\r\n        \"37.75350561243041,-122.37396240234374\"\r\n      ]\r\n    },\r\n    {\r\n      \"type\": \"CIRCLE\",\r\n      \"position\": \"37.71205,-121.36434\",\r\n      \"radius\": 6000\r\n    },\r\n    {\r\n      \"type\": \"CIRCLE\",\r\n      \"position\": \"37.31205,-121.36434\",\r\n      \"radius\": 1000\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/geometrySearch/:query",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"geometrySearch",
+						":query"
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "pizza.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Geometry search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/geometry-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Geometry search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/geometrySearch/:query?geometryList=[\n  {\n    \"type\":\"POLYGON\",\n    \"vertices\":[\n      \"37.7524152343544,-122.43576049804686\",\n      \"37.70660472542312,-122.43301391601562\",\n      \"37.712059855877314,-122.36434936523438\",\n      \"37.75350561243041,-122.37396240234374\"\n    ]\n  },\n  {\n    \"type\":\"CIRCLE\",\n    \"position\":\"37.71205,-121.36434\",\n    \"radius\":6000\n  },\n  {\n    \"type\":\"CIRCLE\",\n    \"position\":\"37.31205,-121.36434\",\n    \"radius\":1000\n  }\n]",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"geometrySearch",
+						":query"
+					],
+					"query": [
+						{
+							"key": "geometryList",
+							"value": "[\n  {\n    \"type\":\"POLYGON\",\n    \"vertices\":[\n      \"37.7524152343544,-122.43576049804686\",\n      \"37.70660472542312,-122.43301391601562\",\n      \"37.712059855877314,-122.36434936523438\",\n      \"37.75350561243041,-122.37396240234374\"\n    ]\n  },\n  {\n    \"type\":\"CIRCLE\",\n    \"position\":\"37.71205,-121.36434\",\n    \"radius\":6000\n  },\n  {\n    \"type\":\"CIRCLE\",\n    \"position\":\"37.31205,-121.36434\",\n    \"radius\":1000\n  }\n]",
+							"description": "List of geometries to search in (JSON)."
+						}
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "pizza.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Geometry search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/geometry-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Geocoding",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/geocode/:query",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"geocode",
+						":query"
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "1600 Pennsylvania Avenue NW Washington, D.C. 20500.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Geocoding example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-geocoding/geocode).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Structured geocode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode=NL&municipality=Amsterdam&countrySubdivision=North Holland",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"structuredGeocode.json"
+					],
+					"query": [
+						{
+							"key": "countryCode",
+							"value": "NL",
+							"description": "The code of the country being targeted."
+						},
+						{
+							"key": "municipality",
+							"value": "Amsterdam",
+							"description": "The municipality (city/town) for the structured address."
+						},
+						{
+							"key": "countrySubdivision",
+							"value": "North Holland",
+							"description": "The state or province for the structured address."
+						}
+					]
+				},
+				"description": "Search API - Structured geocode example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-geocoding/structured-geocode).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Synchronous batch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"batchItems\": [\r\n    {\"query\": \"/search/pizza.json?lat=40.83998&lon=14.25254\"},\r\n    {\r\n        \"query\": \"/searchAlongRoute/pizza.json?maxDetourTime=900\",\r\n        \"post\": {\r\n\t\t  \"route\": {\r\n\t\t    \"points\": [\r\n\t\t      {\r\n\t\t        \"lat\": 37.7524152343544,\r\n\t\t        \"lon\":-122.43576049804686\r\n\t\t      },\r\n\t\t      {\r\n\t\t        \"lat\": 37.70660472542312,\r\n\t\t        \"lon\":-122.43301391601562\r\n\t\t      },\r\n\t\t      {\r\n\t\t        \"lat\": 37.712059855877314,\r\n\t\t        \"lon\":-122.36434936523438\r\n\t\t      },\r\n\t\t      {\r\n\t\t        \"lat\": 37.75350561243041,\r\n\t\t        \"lon\":-122.37396240234374\r\n\t\t      }\r\n\t\t    ]\r\n\t\t  }\r\n\t\t}\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/batch/sync.json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"batch",
+						"sync.json"
+					]
+				},
+				"description": "Search API - Synchronous batch example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-batch-search/synchronous-batch).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Reverse Geocoding",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/reverseGeocode/:position",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"reverseGeocode",
+						":position"
+					],
+					"variable": [
+						{
+							"key": "position",
+							"value": "37.78769,-122.4075.json",
+							"description": "Position composed by lat,lon with expected response format."
+						}
+					]
+				},
+				"description": "Search API - Reverse geocoding example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-reverse-geocoding/reverse-geocode).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "POI categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/poiCategories.json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"poiCategories.json"
+					]
+				},
+				"description": "Search API - POI categories example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-poi-categories/poi-categories).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Along route search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"route\": {\r\n    \"points\": [\r\n      {\r\n        \"lat\": 37.7524152343544,\r\n        \"lon\":-122.43576049804686\r\n      },\r\n      {\r\n        \"lat\": 37.70660472542312,\r\n        \"lon\":-122.43301391601562\r\n      },\r\n      {\r\n        \"lat\": 37.712059855877314,\r\n        \"lon\":-122.36434936523438\r\n      },\r\n      {\r\n        \"lat\": 37.75350561243041,\r\n        \"lon\":-122.37396240234374\r\n      }\r\n    ]\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/searchAlongRoute/:query?maxDetourTime=900",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"searchAlongRoute",
+						":query"
+					],
+					"query": [
+						{
+							"key": "maxDetourTime",
+							"value": "900",
+							"description": "Maximum detour time."
+						}
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "pizza.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Along route search example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/along-route-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{API_KEY}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "50cd93af-fbad-4280-87c6-5a3a2652ca0f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e35cb76e-6788-4e22-88b7-8cc4d53be098",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

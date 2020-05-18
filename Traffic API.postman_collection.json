@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "4fe854a4-ced9-4c54-8386-3f22fc6ce7e5",
+		"name": "Traffic API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vector incident tiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/traffic/map/4/tile/incidents/:zoom/:X/:Y",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"traffic",
+						"map",
+						"4",
+						"tile",
+						"incidents",
+						":zoom",
+						":X",
+						":Y"
+					],
+					"variable": [
+						{
+							"key": "zoom",
+							"value": "14",
+							"description": "The zoom level of the tile to be rendered."
+						},
+						{
+							"key": "X",
+							"value": "8186",
+							"description": "The x coordinate of the tile on the zoom grid."
+						},
+						{
+							"key": "Y",
+							"value": "5450.pbf",
+							"description": "The y coordinate of the tile on the zoom grid together with expected format."
+						}
+					]
+				},
+				"description": "Traffic API - Vector incidents tiles example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-incidents/vector-incident-tiles).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Raster incident tiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/traffic/map/4/tile/incidents/:style/:zoom/:X/:Y",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"traffic",
+						"map",
+						"4",
+						"tile",
+						"incidents",
+						":style",
+						":zoom",
+						":X",
+						":Y"
+					],
+					"variable": [
+						{
+							"key": "style",
+							"value": "s3",
+							"description": "The style to be used to render the tile."
+						},
+						{
+							"key": "zoom",
+							"value": "12",
+							"description": "The zoom level of the tile to be rendered."
+						},
+						{
+							"description": "The x coordinate of the tile on the zoom grid.",
+							"key": "X",
+							"value": "2044"
+						},
+						{
+							"description": "The y coordinate of the tile on the zoom grid together with expected format.",
+							"key": "Y",
+							"value": "1360.png"
+						}
+					]
+				},
+				"description": "Traffic API - Raster incidents tiles example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-incidents/raster-incident-tiles).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Incident details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/traffic/services/4/incidentDetails/:style/:boundingBox/:zoom/:trafficModelID/:format",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"traffic",
+						"services",
+						"4",
+						"incidentDetails",
+						":style",
+						":boundingBox",
+						":zoom",
+						":trafficModelID",
+						":format"
+					],
+					"variable": [
+						{
+							"key": "style",
+							"value": "s3",
+							"description": "The style used with Raster Incident Tiles and Vector Incident Tiles."
+						},
+						{
+							"key": "boundingBox",
+							"value": "6841263.950712,511972.674418,6886056.049288,582676.925582",
+							"description": "The corners of the area to report on, expressed in the projection specified."
+						},
+						{
+							"key": "zoom",
+							"value": "11",
+							"description": "This is the zoom level."
+						},
+						{
+							"key": "trafficModelID",
+							"value": "-1",
+							"description": "The Traffic Model ID is the reference value for the state of traffic at a particular time."
+						},
+						{
+							"key": "format",
+							"value": "json",
+							"description": "The content type of the response structure."
+						}
+					]
+				},
+				"description": "Traffic API - Incident details example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-incidents/incident-details).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Incident viewport",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/traffic/services/4/incidentViewport/:boundingBox/:boundingZoom/:overviewBox/:overviewZoom/:copyright/:contentType",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"traffic",
+						"services",
+						"4",
+						"incidentViewport",
+						":boundingBox",
+						":boundingZoom",
+						":overviewBox",
+						":overviewZoom",
+						":copyright",
+						":contentType"
+					],
+					"variable": [
+						{
+							"description": "Bounding box of the map viewport in an EPSG:900913 projection.",
+							"key": "boundingBox",
+							"value": "-939584.4813015489,-23954526.723651607,14675583.153020501,25043442.895825107"
+						},
+						{
+							"key": "boundingZoom",
+							"value": "2",
+							"description": "The zoom level of the map viewport."
+						},
+						{
+							"key": "overviewBox",
+							"value": "-939584.4813015489,-23954526.723651607,14675583.153020501,25043442.895825107",
+							"description": "Bounding box of the overview map in EPSG:900913 projection."
+						},
+						{
+							"key": "overviewZoom",
+							"value": "2",
+							"description": "Zoom level of the overview map."
+						},
+						{
+							"key": "copyright",
+							"value": "true",
+							"description": "Determines what copyright information to return."
+						},
+						{
+							"key": "contentType",
+							"value": "json",
+							"description": "The content type of the response structure."
+						}
+					]
+				},
+				"description": "Traffic API - Incident viewport example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-incidents/traffic-incident-viewport).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Flow segment data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/traffic/services/4/flowSegmentData/:style/:zoom/:format?point=52.41072,4.84239",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"traffic",
+						"services",
+						"4",
+						"flowSegmentData",
+						":style",
+						":zoom",
+						":format"
+					],
+					"query": [
+						{
+							"key": "point",
+							"value": "52.41072,4.84239",
+							"description": "The coordinates of the point close to the road segment."
+						}
+					],
+					"variable": [
+						{
+							"key": "style",
+							"value": "absolute",
+							"description": "The style used with Raster Flow Tiles and Vector Flow Tiles."
+						},
+						{
+							"key": "zoom",
+							"value": "10",
+							"description": "The zoom level."
+						},
+						{
+							"key": "format",
+							"value": "json",
+							"description": "The content type of the Response structure."
+						}
+					]
+				},
+				"description": "Traffic API - Flow segment data example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-flow/flow-segment-data).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Vector flow tiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/traffic/map/4/tile/flow/:type/:zoom/:X/:Y",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"traffic",
+						"map",
+						"4",
+						"tile",
+						"flow",
+						":type",
+						":zoom",
+						":X",
+						":Y"
+					],
+					"variable": [
+						{
+							"key": "type",
+							"value": "absolute",
+							"description": "Types of traffic flow."
+						},
+						{
+							"description": "The zoom level of the tile to be rendered.",
+							"key": "zoom",
+							"value": "14"
+						},
+						{
+							"description": "The x coordinate of the tile on the zoom grid.",
+							"key": "X",
+							"value": "8186"
+						},
+						{
+							"description": "The y coordinate of the tile on the zoom grid together with expected format.",
+							"key": "Y",
+							"value": "5450.pbf"
+						}
+					]
+				},
+				"description": "Traffic API - Vector flow tiles example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-flow/vector-flow-tiles).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Raster flow tiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/traffic/map/4/tile/flow/:style/:zoom/:X/:Y",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"traffic",
+						"map",
+						"4",
+						"tile",
+						"flow",
+						":style",
+						":zoom",
+						":X",
+						":Y"
+					],
+					"variable": [
+						{
+							"description": "The style to be used to render the tile.",
+							"key": "style",
+							"value": "absolute"
+						},
+						{
+							"description": "The zoom level of the tile to be rendered.",
+							"key": "zoom",
+							"value": "12"
+						},
+						{
+							"description": "The x coordinate of the tile on the zoom grid.",
+							"key": "X",
+							"value": "2044"
+						},
+						{
+							"description": "The y coordinate of the tile on the zoom grid together with expected format.",
+							"key": "Y",
+							"value": "1360.png"
+						}
+					]
+				},
+				"description": "Traffic API - Raster flow tiles example.\r\n\r\nDocumentation available [here](https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-flow/raster-flow-tiles).\r\n\r\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{API_KEY}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "key",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}

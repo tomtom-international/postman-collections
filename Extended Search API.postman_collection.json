@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "8c6a286d-f5e7-47de-9d20-a82cd7bed788",
+		"name": "Extended Search API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Fuzzy search - find charging station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0f410814-d692-4559-aa3c-a0491fba5e23",
+						"exec": [
+							"let response = pm.response.json();",
+							"let chargingAvailabilityId = response.results[0].dataSources.chargingAvailability.id;",
+							"pm.environment.set(\"chargingAvailabilityId\", chargingAvailabilityId)",
+							"postman.setNextRequest(\"EV charging stations availability\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/search/:query?connectorSet=IEC62196Type2CableAttached&lat=52.37317&lon=4.89066",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"search",
+						":query"
+					],
+					"query": [
+						{
+							"key": "connectorSet",
+							"value": "IEC62196Type2CableAttached",
+							"description": "A comma-separated list of connector types which could be used to restrict the result to Points Of Interest of type Electric Vehicle Station supporting specific connector types."
+						},
+						{
+							"key": "lat",
+							"value": "52.37317",
+							"description": "Latitude where results should be biased."
+						},
+						{
+							"key": "lon",
+							"value": "4.89066",
+							"description": "Longitude where results should be biased."
+						}
+					],
+					"variable": [
+						{
+							"key": "query",
+							"value": "electric vehicle station.json",
+							"description": "Query string together with requested response format."
+						}
+					]
+				},
+				"description": "Search API - Fuzzy search - find charging station example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation-search/fuzzy-search).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "EV charging stations availability",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1cc2c3d8-c2cf-4de5-b37d-7ba2c0ad4cd6",
+						"exec": [
+							"if (!pm.environment.get(\"chargingAvailabilityId\")) { throw new Error(\"Run Fuzzy search - find charging station first or set chargingAvailabilityId variable\"); }"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/search/2/chargingAvailability.json?chargingAvailability={{chargingAvailabilityId}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"search",
+						"2",
+						"chargingAvailability.json"
+					],
+					"query": [
+						{
+							"key": "chargingAvailability",
+							"value": "{{chargingAvailabilityId}}",
+							"description": "The chargingAvailability ID, previously retrieved from a Search Request."
+						}
+					]
+				},
+				"description": "Extended Search API - EV charging stations example.\n\nDocumentation available [here](https://developer.tomtom.com/search-api/search-api-documentation/ev-charging-stations-availability).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{API_KEY}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "key",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}

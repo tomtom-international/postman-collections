@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "e8df03ff-ec68-4183-bd6e-eefb836956a9",
+		"name": "Routing API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Car routing A to B",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/calculateRoute/:locations/json?travelMode=car",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"calculateRoute",
+						":locations",
+						"json"
+					],
+					"query": [
+						{
+							"key": "travelMode",
+							"value": "car"
+						}
+					],
+					"variable": [
+						{
+							"key": "locations",
+							"type": "string",
+							"value": "52.50931,13.42936:52.50274,13.43872",
+							"description": "Locations through which the route is calculated."
+						}
+					]
+				},
+				"description": "Routing API - Car routing A to B example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation-routing/calculate-route).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Reachable range",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/calculateReachableRange/:origin/json?fuelBudgetInLiters=10&constantSpeedConsumptionInLitersPerHundredkm=50,6.3:130,11.5",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"calculateReachableRange",
+						":origin",
+						"json"
+					],
+					"query": [
+						{
+							"key": "fuelBudgetInLiters",
+							"value": "10",
+							"description": "Fuel budget in liters that determines maximal range which can be traveled using the specified Combustion Consumption Model."
+						},
+						{
+							"key": "constantSpeedConsumptionInLitersPerHundredkm",
+							"value": "50,6.3:130,11.5",
+							"description": "Specifies the speed-dependent component of consumption."
+						}
+					],
+					"variable": [
+						{
+							"key": "origin",
+							"value": "50.97450,5.86605",
+							"description": "Point from which the range calculation should start."
+						}
+					]
+				},
+				"description": "Routing API - Reachable range example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation-routing/calculate-reachable-range).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Truck routing",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/calculateRoute/:locations/json?travelMode=truck&vehicleWidth=2.4&vehicleHeight=3&vehicleMaxSpeed=90",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"calculateRoute",
+						":locations",
+						"json"
+					],
+					"query": [
+						{
+							"key": "travelMode",
+							"value": "truck",
+							"description": "The mode of travel for the requested route."
+						},
+						{
+							"key": "vehicleWidth",
+							"value": "2.4",
+							"description": "Width of the vehicle in meters."
+						},
+						{
+							"key": "vehicleHeight",
+							"value": "3",
+							"description": "Height of the vehicle in meters."
+						},
+						{
+							"key": "vehicleMaxSpeed",
+							"value": "90",
+							"description": "Maximum speed of the vehicle in kilometers/hour."
+						}
+					],
+					"variable": [
+						{
+							"key": "locations",
+							"type": "string",
+							"value": "52.50931,13.42936:52.13167,11.64032",
+							"description": "Locations through which the route is calculated."
+						}
+					]
+				},
+				"description": "Routing API - Truck routing example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation-routing/calculate-route).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Scheduled routing / in advance",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cfd8752d-f45b-46f5-bac5-113110bdd9ce",
+						"exec": [
+							"var date = new Date();",
+							"date.setMinutes(date.getMinutes() + 30);",
+							"pm.variables.set(\"date\", date);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/calculateRoute/:locations/json?departAt={{date}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"calculateRoute",
+						":locations",
+						"json"
+					],
+					"query": [
+						{
+							"key": "departAt",
+							"value": "{{date}}",
+							"description": "The date and time of departure from the origin point."
+						}
+					],
+					"variable": [
+						{
+							"key": "locations",
+							"type": "string",
+							"value": "52.50931,13.42936:52.13167,11.64032",
+							"description": "Locations through which the route is calculated."
+						}
+					]
+				},
+				"description": "Routing API - Scheduled routing example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation-routing/calculate-route).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Avoid motorways",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a38d0e22-3306-4479-9bf8-e3ab1baf42b7",
+						"exec": [
+							"var date = new Date();",
+							"date.setMinutes(date.getMinutes() + 30);",
+							"pm.variables.set(\"date\", date);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/calculateRoute/:locations/json?avoid=motorways&instructionsType=text",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"calculateRoute",
+						":locations",
+						"json"
+					],
+					"query": [
+						{
+							"key": "avoid",
+							"value": "motorways",
+							"description": "Specifies something that the route calculation should try to avoid when determining the route."
+						},
+						{
+							"key": "instructionsType",
+							"value": "text",
+							"description": "If specified, guidance instructions will be returned (if available)."
+						}
+					],
+					"variable": [
+						{
+							"key": "locations",
+							"type": "string",
+							"value": "52.50931,13.42936:52.13167,11.64032",
+							"description": "Locations through which the route is calculated."
+						}
+					]
+				},
+				"description": "Routing API - Avoid motorways example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation-routing/calculate-route).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Return travel times with and without traffic",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fac39bd7-9587-4272-af1f-a62e421a684a",
+						"exec": [
+							"var date = new Date();",
+							"date.setMinutes(date.getMinutes() + 30);",
+							"pm.variables.set(\"date\", date);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/calculateRoute/:locations/json?computeTravelTimeFor=all",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"calculateRoute",
+						":locations",
+						"json"
+					],
+					"query": [
+						{
+							"key": "computeTravelTimeFor",
+							"value": "all",
+							"description": "Specifies whether to return additional travel times using different types of traffic information (none, historic, live) as well as the default best-estimate travel time."
+						}
+					],
+					"variable": [
+						{
+							"key": "locations",
+							"type": "string",
+							"value": "52.50931,13.42936:52.13167,11.64032",
+							"description": "Locations through which the route is calculated."
+						}
+					]
+				},
+				"description": "Routing API - Return travel times with and without traffic example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation-routing/calculate-route).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Synchronous batch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"batchItems\": [\n        {\n            \"query\": \"/calculateRoute/52.50931,13.42936:52.50274,13.43872/json?travelMode=car\"\n        },\n        {\n            \"query\": \"/calculateRoute/52.50931,13.42936:52.50274,13.43872/json?travelMode=truck\",\n            \"post\": {\n                \"avoidAreas\": {\n                    \"rectangles\": [\n                        {\n                            \"southWestCorner\": {\n                                \"latitude\": 48.81851,\n                                \"longitude\": 2.26593\n                            },\n                            \"northEastCorner\": {\n                                \"latitude\": 48.90309,\n                                \"longitude\": 2.41115\n                            }\n                        }\n                    ]\n                }\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/batch/sync/json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"batch",
+						"sync",
+						"json"
+					]
+				},
+				"description": "Routing API - Synchronous batch example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation-batch-routing/synchronous-batch).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		},
+		{
+			"name": "Synchronous matrix",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"origins\": [\n        {\n            \"point\": {\n                \"latitude\": 45.458545,\n                \"longitude\": 9.15049\n            }\n        },\n        {\n            \"point\": {\n                \"latitude\": 45.403337,\n                \"longitude\": 11.050541\n            }\n        }\n    ],\n    \"destinations\": [\n        {\n            \"point\": {\n                \"latitude\": 48.149853,\n                \"longitude\": 11.499931\n            }\n        },\n        {\n            \"point\": {\n                \"latitude\": 50.033688,\n                \"longitude\": 14.538226\n            }\n        }\n    ],\n    \"options\": {\n        \"post\": {\n            \"avoidVignette\": [\n                \"AUS\",\n                \"CHE\"\n            ]\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/matrix/sync/json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"matrix",
+						"sync",
+						"json"
+					]
+				},
+				"description": "Routing API - Synchronous matrix example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation-matrix-routing/synchronous-matrix).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{API_KEY}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "key",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}

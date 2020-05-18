@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "168377fb-19b1-4574-8aed-aa8de306483b",
+		"name": "Extended Routing API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Long distance EV routing",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"chargingModes\": [\n        {\n            \"chargingConnections\": [\n                {\n                    \"facilityType\": \"Charge_380_to_480V_3_Phase_at_32A\",\n                    \"plugType\": \"IEC_62196_Type_2_Outlet\"\n                }\n            ],\n            \"chargingCurve\": [\n                {\n                    \"chargeInkWh\": 6,\n                    \"timeToChargeInSeconds\": 360\n                },\n                {\n                    \"chargeInkWh\": 12,\n                    \"timeToChargeInSeconds\": 720\n                },\n                {\n                    \"chargeInkWh\": 28,\n                    \"timeToChargeInSeconds\": 1944\n                },\n                {\n                    \"chargeInkWh\": 40,\n                    \"timeToChargeInSeconds\": 4680\n                }\n            ]\n        },\n        {\n            \"chargingConnections\": [\n                {\n                    \"facilityType\": \"Charge_200_to_240V_1_Phase_at_10A\",\n                    \"plugType\": \"Standard_Household_Country_Specific\"\n                }\n            ],\n            \"chargingCurve\": [\n                {\n                    \"chargeInkWh\": 6,\n                    \"timeToChargeInSeconds\": 15624\n                },\n                {\n                    \"chargeInkWh\": 12,\n                    \"timeToChargeInSeconds\": 32652\n                },\n                {\n                    \"chargeInkWh\": 28,\n                    \"timeToChargeInSeconds\": 76248\n                },\n                {\n                    \"chargeInkWh\": 40,\n                    \"timeToChargeInSeconds\": 109080\n                }\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.tomtom.com/routing/1/calculateLongDistanceEVRoute/:locations/json?vehicleEngineType=electric&currentChargeInkWh=20&maxChargeInkWh=40&minChargeAtChargingStopsInkWh=4&minChargeAtDestinationInkWh=4&constantSpeedConsumptionInkWhPerHundredkm=32,10.87:77,18.01",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tomtom",
+						"com"
+					],
+					"path": [
+						"routing",
+						"1",
+						"calculateLongDistanceEVRoute",
+						":locations",
+						"json"
+					],
+					"query": [
+						{
+							"key": "vehicleEngineType",
+							"value": "electric",
+							"description": "The engine type of the vehicle."
+						},
+						{
+							"key": "currentChargeInkWh",
+							"value": "20",
+							"description": "Specifies the current electric energy supply in kilowatt hours (kWh)."
+						},
+						{
+							"key": "maxChargeInkWh",
+							"value": "40",
+							"description": "Specifies the maximum electric energy supply in kilowatt hours (kWh) that may be stored in the vehicle's battery."
+						},
+						{
+							"key": "minChargeAtChargingStopsInkWh",
+							"value": "4",
+							"description": "The battery level upon arrival at each intermediate charging stop of the resulting route will be at least this much."
+						},
+						{
+							"key": "minChargeAtDestinationInkWh",
+							"value": "4",
+							"description": "The battery level upon arrival at the destination of the resulting route will be at least this much."
+						},
+						{
+							"key": "constantSpeedConsumptionInkWhPerHundredkm",
+							"value": "32,10.87:77,18.01",
+							"description": "Specifies the speed-dependent component of consumption."
+						}
+					],
+					"variable": [
+						{
+							"key": "locations",
+							"value": "52.507,13.492:50.104,8.624",
+							"description": "Locations through which the route is calculated."
+						}
+					]
+				},
+				"description": "Extended Routing API - Long distance EV routing example.\n\nDocumentation available [here](https://developer.tomtom.com/routing-api/routing-api-documentation/long-distance-ev-routing).\n\nAPI key can be found at [Dashboard](https://developer.tomtom.com/user/me/apps)."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{API_KEY}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "key",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}
