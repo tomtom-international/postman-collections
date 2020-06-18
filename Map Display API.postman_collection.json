@@ -285,5 +285,27 @@
 			}
 		]
 	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6e35815c-a774-4445-8473-f5c8cf6e6039",
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add( { key: 'TomTom-User-Agent', value: 'Postman' } );"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "68477201-172d-42c5-9505-43132f0844ff",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"protocolProfileBehavior": {}
 }

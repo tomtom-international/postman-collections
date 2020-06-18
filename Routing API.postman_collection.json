@@ -399,5 +399,27 @@
 			}
 		]
 	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "73cd7cd5-0a1b-4dc7-b07c-13d4996b47e7",
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add( { key: 'TomTom-User-Agent', value: 'Postman' } );"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "142fcd82-bb7c-465a-a98f-f25815ef507f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"protocolProfileBehavior": {}
 }

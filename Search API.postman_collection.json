@@ -685,7 +685,7 @@
 				"id": "50cd93af-fbad-4280-87c6-5a3a2652ca0f",
 				"type": "text/javascript",
 				"exec": [
-					""
+					"pm.request.headers.add( { key: 'TomTom-User-Agent', value: 'Postman' } );"
 				]
 			}
 		},
